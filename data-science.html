@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Science — Caio Torves</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#0c0c0c;--bg2:#141414;--bg3:#1c1c1c;
+      --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+      --text:#e6e2dc;--text2:#888480;--text3:#525050;
+      --gold:#c8a96e;--gold2:#e8c98e;--radius:6px;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;font-weight:300;line-height:1.7;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(12,12,12,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:54px;}
+    .nav-logo{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:.06em;text-decoration:none;}
+    .nav-back{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+    .nav-back:hover{color:var(--text);}
+    .nav-back::before{content:'← ';}
+
+    .page-hero{max-width:1100px;margin:0 auto;padding:8rem 3rem 4rem;border-bottom:1px solid var(--border);}
+    .page-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+    .page-tag::before{content:'';width:24px;height:1px;background:var(--gold);}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,58px);font-weight:400;line-height:1.1;margin-bottom:1rem;}
+    .page-title em{font-style:italic;color:var(--gold);}
+    .page-sub{font-size:15px;color:var(--text2);max-width:540px;line-height:1.8;}
+
+    .content{max-width:1100px;margin:0 auto;padding:4rem 3rem;}
+
+    .project-block{padding:2.5rem 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:1fr 280px;gap:3rem;align-items:start;}
+    .project-block:last-child{border-bottom:none;}
+
+    .badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:.75rem;}
+    .badge-eda{background:rgba(58,95,130,0.15);color:#5a8fbc;border:1px solid rgba(58,95,130,0.3);}
+    .badge-ml{background:rgba(130,58,95,0.15);color:#bc8abf;border:1px solid rgba(130,58,95,0.3);}
+    .badge-health{background:rgba(74,124,89,0.15);color:#6aad80;border:1px solid rgba(74,124,89,0.3);}
+
+    .project-title{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,30px);font-weight:400;line-height:1.2;margin-bottom:.4rem;}
+    .project-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:.05em;margin-bottom:1rem;}
+    .project-desc{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:1.25rem;}
+
+    .tech-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
+    .tech-chip{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);padding:3px 9px;border:1px solid var(--border);border-radius:100px;letter-spacing:.04em;}
+
+    /* buttons */
+    .btn-row{display:flex;flex-direction:column;gap:8px;}
+    .btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;border-radius:var(--radius);text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:all .18s;white-space:nowrap;}
+    .btn-github{background:var(--bg3);color:var(--text2);border:1px solid var(--border2);}
+    .btn-github:hover{border-color:var(--text2);color:var(--text);}
+    .btn-gold{background:rgba(200,169,110,0.1);color:var(--gold);border:1px solid rgba(200,169,110,0.3);}
+    .btn-gold:hover{background:rgba(200,169,110,0.18);border-color:var(--gold);}
+    .btn-note{font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:.04em;padding-top:2px;}
+    .btn-icon{opacity:.6;font-size:12px;}
+
+    footer{max-width:1100px;margin:0 auto;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--border);}
+
+    @media(max-width:768px){
+      nav{padding:0 1.25rem}
+      .page-hero,.content{padding-left:1.25rem;padding-right:1.25rem}
+      .project-block{grid-template-columns:1fr}
+      .btn-row{flex-direction:row;flex-wrap:wrap}
+      footer{padding:1.5rem 1.25rem}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">CT</a>
+  <a class="nav-back" href="index.html">Back to portfolio</a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-tag">Projects</p>
+  <h1 class="page-title">Data Science<br><em>& Analytics</em></h1>
+  <p class="page-sub">Five projects applying exploratory analysis, machine learning, and predictive modeling to real-world datasets — from financial markets to public health and human behavior.</p>
+</div>
+
+<div class="content">
+
+  <!-- DENGUE -->
+  <div class="project-block">
+    <div>
+      <span class="badge badge-health">EDA · Public Health</span>
+      <h2 class="project-title">Dengue Epidemic in Brazil</h2>
+      <p class="project-subtitle">Exploratory Analysis · 2014–2024 · 10 Years of Data</p>
+      <p class="project-desc">Ten years of dengue surveillance data investigated across seasonal patterns, demographics, case severity, and climate correlation. The analysis was published as a data storytelling article on Medium, translating the technical findings into a clear narrative for a broader audience.</p>
+      <div class="tech-row">
+        <span class="tech-chip">Python</span><span class="tech-chip">Pandas</span><span class="tech-chip">Seaborn</span><span class="tech-chip">Matplotlib</span><span class="tech-chip">Data Storytelling</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-github" href="https://github.com/caiotorves/analise-dengue-brasil" target="_blank"><span>View on GitHub</span><span class="btn-icon">↗</span></a>
+      <a class="btn btn-gold" href="https://medium.com/@caiotorves/o-que-os-dados-nos-dizem-sobre-a-epidemia-de-dengue-no-brasil-d3796257d585" target="_blank"><span>Read Article</span><span class="btn-icon">↗</span></a>
+    </div>
+  </div>
+
+  <!-- IBOVESPA -->
+  <div class="project-block">
+    <div>
+      <span class="badge badge-ml">ML · Forecasting</span>
+      <h2 class="project-title">Ibovespa Trend Forecasting</h2>
+      <p class="project-subtitle">Time Series · Classification Model · FIAP Tech Challenge</p>
+      <p class="project-desc">Developed a machine learning classification model (Up/Down) to predict significant daily movements of the Brazilian stock market index. Using 5 years of IBOVESPA data (1,247 trading sessions), the project tackled market noise through threshold filtering and feature engineering — achieving 76.67% accuracy with a Random Forest model, surpassing the 75% challenge target.</p>
+      <div class="tech-row">
+        <span class="tech-chip">Python</span><span class="tech-chip">Scikit-learn</span><span class="tech-chip">Random Forest</span><span class="tech-chip">XGBoost</span><span class="tech-chip">Feature Engineering</span><span class="tech-chip">Pandas</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-github" href="https://github.com/caiotorves/tech-challenge-previsao-ibov" target="_blank"><span>View on GitHub</span><span class="btn-icon">↗</span></a>
+      <a class="btn btn-gold" href="ibovespa-forecast-presentation.pdf" target="_blank"><span>View Presentation</span><span class="btn-icon">↗</span></a>
+    </div>
+  </div>
+
+  <!-- COVID -->
+  <div class="project-block">
+    <div>
+      <span class="badge badge-health">EDA · Public Health</span>
+      <h2 class="project-title">COVID-19 Data Analytics</h2>
+      <p class="project-subtitle">PNAD-COVID-19 · Socioeconomic & Clinical Analysis · FIAP Tech Challenge</p>
+      <p class="project-desc">Analysis of Brazil's PNAD-COVID-19 survey data using PySpark on Databricks, following a Medallion architecture (Bronze → Silver → Gold layers) on Google Cloud Storage. Covered clinical symptom profiling, hospitalization probability, demographic analysis, geographic heat mapping, and the socioeconomic impact of the Emergency Aid (Auxílio Emergencial) — delivering strategic insights for healthcare resource allocation.</p>
+      <div class="tech-row">
+        <span class="tech-chip">Python</span><span class="tech-chip">PySpark</span><span class="tech-chip">Databricks</span><span class="tech-chip">Google Cloud (GCP)</span><span class="tech-chip">Power BI</span><span class="tech-chip">Medallion Architecture</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-github" href="https://github.com/caiotorves/tech-challenge-fiap-covid19" target="_blank"><span>View on GitHub</span><span class="btn-icon">↗</span></a>
+      <a class="btn btn-gold" href="covid19-analysis-presentation.pdf" target="_blank"><span>View Presentation</span><span class="btn-icon">↗</span></a>
+    </div>
+  </div>
+
+  <!-- SALARIES -->
+  <div class="project-block">
+    <div>
+      <span class="badge badge-eda">EDA · Labor Market</span>
+      <h2 class="project-title">Data Science Salaries</h2>
+      <p class="project-subtitle">Global Salary Trends · Exploratory Analysis</p>
+      <p class="project-desc">Exploratory analysis of salary trends across data roles globally — investigating the influence of experience level, remote work arrangements, job title, company size, and country on compensation. Includes an interactive Streamlit dashboard for data exploration.</p>
+      <div class="tech-row">
+        <span class="tech-chip">Python</span><span class="tech-chip">Pandas</span><span class="tech-chip">Matplotlib</span><span class="tech-chip">Seaborn</span><span class="tech-chip">Streamlit</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-github" href="https://github.com/caiotorves/Analise-Salarios-Data-Science" target="_blank"><span>View on GitHub</span><span class="btn-icon">↗</span></a>
+      <a class="btn btn-gold" href="https://data-science-salary-dashboard.streamlit.app/" target="_blank"><span>Live App</span><span class="btn-icon">↗</span></a>
+      <span class="btn-note">* App may take a moment to load after inactivity</span>
+    </div>
+  </div>
+
+  <!-- OBESITY -->
+  <div class="project-block">
+    <div>
+      <span class="badge badge-health">EDA · Healthcare</span>
+      <h2 class="project-title">Obesity Data Analysis</h2>
+      <p class="project-subtitle">Clinical & Behavioral Analysis · Predictive Insights</p>
+      <p class="project-desc">Analysis of obesity-related data examining behavioral, dietary, and demographic factors linked to weight classification. The project includes a Streamlit application for interactive exploration and a Power BI dashboard built for clinical teams to obtain insights, anticipate actions, and predict patient behavior patterns.</p>
+      <div class="tech-row">
+        <span class="tech-chip">Python</span><span class="tech-chip">Pandas</span><span class="tech-chip">Scikit-learn</span><span class="tech-chip">Streamlit</span><span class="tech-chip">Power BI</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-github" href="https://github.com/caiotorves/analise-dados-obesidade" target="_blank"><span>View on GitHub</span><span class="btn-icon">↗</span></a>
+      <a class="btn btn-gold" href="https://data-science-obesity.streamlit.app/" target="_blank"><span>Live App</span><span class="btn-icon">↗</span></a>
+      <a class="btn btn-gold" href="bi-dashboards.html" target="_blank"><span>View BI Dashboard</span><span class="btn-icon">→</span></a>
+      <span class="btn-note">* App may take a moment to load after inactivity</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);">caiotorves.github.io</span>
+  <a href="index.html" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-decoration:none;">← Back to portfolio</a>
+</footer>
+
+</body>
+</html>
