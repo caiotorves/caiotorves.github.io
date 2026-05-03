@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects — Caio Torves</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&family=Lato:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    :root {
+      --bg:#0c0c0c; --bg2:#141414; --bg3:#1c1c1c;
+      --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+      --text:#e6e2dc; --text2:#888480; --text3:#525050;
+      --gold:#c8a96e; --gold2:#e8c98e;
+      --green:rgba(74,124,89,0.15); --green-c:#6aad80; --green-b:rgba(74,124,89,0.3);
+      --blue:rgba(58,95,130,0.15); --blue-c:#5a8fbc; --blue-b:rgba(58,95,130,0.3);
+      --radius:6px;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Lato',sans-serif;font-weight:300;line-height:1.7;}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(12,12,12,0.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 3rem;height:54px;}
+    .nav-logo{font-family:'DM Mono',monospace;font-size:13px;color:var(--gold);letter-spacing:.06em;text-decoration:none;}
+    .nav-back{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .2s;}
+    .nav-back:hover{color:var(--text);}
+    .nav-back::before{content:'← ';}
+
+    .page-hero{max-width:1100px;margin:0 auto;padding:8rem 3rem 4rem;border-bottom:1px solid var(--border);}
+    .page-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
+    .page-tag::before{content:'';width:24px;height:1px;background:var(--gold);}
+    .page-title{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,58px);font-weight:400;line-height:1.1;margin-bottom:1rem;}
+    .page-title em{font-style:italic;color:var(--gold);}
+    .page-sub{font-size:15px;color:var(--text2);max-width:540px;line-height:1.8;}
+
+    .content{max-width:1100px;margin:0 auto;padding:4rem 3rem;}
+
+    /* project block */
+    .project-block{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
+    .project-block:last-child{border-bottom:none;margin-bottom:0;}
+
+    .project-header{margin-bottom:1.5rem;}
+    .badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:.75rem;}
+    .badge-gov{background:var(--green);color:var(--green-c);border:1px solid var(--green-b);}
+    .badge-bi{background:rgba(200,169,110,0.1);color:var(--gold);border:1px solid rgba(200,169,110,0.25);}
+
+    .project-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3.5vw,38px);font-weight:400;line-height:1.15;margin-bottom:.4rem;}
+    .project-subtitle{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);letter-spacing:.05em;margin-bottom:1rem;}
+    .project-desc{font-size:15px;color:var(--text2);line-height:1.8;max-width:680px;margin-bottom:1.75rem;}
+
+    /* two column layout for gov projects */
+    .project-body{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:start;}
+    .project-body.single{grid-template-columns:1fr;}
+
+    .impact-list{list-style:none;}
+    .impact-list li{font-size:14px;color:var(--text2);padding:7px 0 7px 20px;position:relative;border-bottom:1px solid var(--border);line-height:1.6;}
+    .impact-list li:last-child{border-bottom:none;}
+    .impact-list li::before{content:'→';position:absolute;left:0;color:var(--gold);font-size:12px;top:9px;}
+    .impact-list li strong{color:var(--text);font-weight:500;}
+
+    /* big numbers */
+    .numbers-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .number-cell{background:var(--bg2);padding:1.5rem 1.25rem;text-align:center;}
+    .number-val{font-family:'Playfair Display',serif;font-size:34px;color:var(--gold);display:block;line-height:1;margin-bottom:6px;}
+    .number-desc{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;line-height:1.5;}
+
+    /* tech stack */
+    .tech-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:1.5rem;}
+    .tech-chip{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);padding:4px 10px;border:1px solid var(--border);border-radius:100px;letter-spacing:.04em;}
+
+    /* candeias — wide single block */
+    .candeias-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-top:1.75rem;}
+
+    footer{max-width:1100px;margin:0 auto;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;border-top:1px solid var(--border);}
+    .footer-url{font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);}
+
+    @media(max-width:768px){
+      nav{padding:0 1.25rem}
+      .page-hero,.content{padding-left:1.25rem;padding-right:1.25rem}
+      .project-body{grid-template-columns:1fr}
+      .numbers-grid{grid-template-columns:1fr 1fr}
+      .candeias-grid{grid-template-columns:1fr 1fr}
+      footer{padding:1.5rem 1.25rem}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">CT</a>
+  <a class="nav-back" href="index.html">Back to portfolio</a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-tag">Projects</p>
+  <h1 class="page-title">Government & <em>Business</em></h1>
+  <p class="page-sub">Two state-scale government platforms and one private sector engagement — where data, business logic, and technology came together to produce measurable, lasting impact.</p>
+</div>
+
+<div class="content">
+
+  <!-- REGIN -->
+  <div class="project-block">
+    <div class="project-header">
+      <span class="badge badge-gov">Gov · Business Licensing</span>
+      <h2 class="project-title">Regin</h2>
+      <p class="project-subtitle">Business Registration Platform · JUCEB + SEBRAE + SEFAZ Integration</p>
+      <p class="project-desc">End-to-end digital transformation of the business registration process in the State of Bahia. What was once a fully manual, email-and-paper workflow became a self-service platform — integrated with the State Commercial Registry (JUCEB), SEBRAE, and the State Revenue Secretariat (SEFAZ) for in-platform payments. Citizens could open their own process in real time, with no waiting and no intermediaries.</p>
+    </div>
+    <div class="project-body">
+      <ul class="impact-list">
+        <li>Reduced business licensing time from <strong>60+ days to real-time</strong> self-service</li>
+        <li>Played a key role in enabling a <strong>+53% increase</strong> in new business registrations</li>
+        <li>Enabled <strong>34K+ businesses</strong> to be created in a single quarter</li>
+        <li>Designed all business rules, system workflows, and financial integrations with SEFAZ (DAE validation), eliminating manual document handling and wait cycles</li>
+        <li>Eliminated critical bureaucratic bottlenecks, significantly improving the ease of doing business and accelerating economic activity</li>
+      </ul>
+      <div class="numbers-grid">
+        <div class="number-cell"><span class="number-val">+53%</span><span class="number-desc">New business registrations</span></div>
+        <div class="number-cell"><span class="number-val">34K+</span><span class="number-desc">Businesses in one quarter</span></div>
+        <div class="number-cell"><span class="number-val">60→0</span><span class="number-desc">Days reduced to real-time</span></div>
+        <div class="number-cell"><span class="number-val">3</span><span class="number-desc">Gov systems integrated</span></div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <span class="tech-chip">SQL</span><span class="tech-chip">Power BI</span><span class="tech-chip">Process Design</span><span class="tech-chip">Business Rules</span><span class="tech-chip">UAT</span><span class="tech-chip">Agile / Kanban</span><span class="tech-chip">Stakeholder Management</span>
+    </div>
+  </div>
+
+  <!-- FÊNIX -->
+  <div class="project-block">
+    <div class="project-header">
+      <span class="badge badge-gov">Gov · Fire Safety</span>
+      <h2 class="project-title">Fênix</h2>
+      <p class="project-subtitle">Fire Safety Compliance Platform · Statewide + National Reach</p>
+      <p class="project-desc">Modernized the entire fire safety project submission and approval workflow — transitioning 100% of paper-based operations to a governed digital platform used by engineers, architects, and businesses across the entire state and from other parts of Brazil. Designed the validation logic, anti-fraud rules, and document workflow that defined how thousands of technical projects were reviewed and approved.</p>
+    </div>
+    <div class="project-body">
+      <ul class="impact-list">
+        <li><strong>90% reduction</strong> in project analysis rework through a document-locking mechanism — allowing analysts to approve correct files individually, removing the need for full reanalysis</li>
+        <li><strong>60%+ increase</strong> in analyst productivity by eliminating redundant review cycles</li>
+        <li>Designed anti-fraud validation rules preventing submission of fraudulent or incomplete technical files</li>
+        <li>Delivered a system used across the entire state by engineers, architects, and businesses — and by professionals from other parts of Brazil</li>
+        <li>Built executive dashboards for leadership to track team productivity, process velocity, project volume, and compliance KPIs</li>
+      </ul>
+      <div class="numbers-grid">
+        <div class="number-cell"><span class="number-val">90%</span><span class="number-desc">Reduction in rework</span></div>
+        <div class="number-cell"><span class="number-val">60%+</span><span class="number-desc">Analyst productivity gain</span></div>
+        <div class="number-cell"><span class="number-val">100%</span><span class="number-desc">Paper workflows digitized</span></div>
+        <div class="number-cell"><span class="number-val">0</span><span class="number-desc">Fraudulent docs approved</span></div>
+      </div>
+    </div>
+    <div class="tech-row">
+      <span class="tech-chip">SQL</span><span class="tech-chip">Power BI</span><span class="tech-chip">Business Rules</span><span class="tech-chip">Anti-fraud Logic</span><span class="tech-chip">UAT</span><span class="tech-chip">Training & Enablement</span><span class="tech-chip">Agile / Kanban</span>
+    </div>
+  </div>
+
+  <!-- CLUBE CANDEIAS -->
+  <div class="project-block">
+    <div class="project-header">
+      <span class="badge badge-bi">BI · Private Sector</span>
+      <h2 class="project-title">Clube Candeias</h2>
+      <p class="project-subtitle">Business Intelligence Infrastructure · Cross-functional Analytics</p>
+      <p class="project-desc">Built the BI culture and analytics infrastructure from the ground up across the entire organization — delivering dashboards, predictive models, and data-driven frameworks to Marketing, Sales, Finance, Accounting, HR, Customer Success, and Customer Experience teams. Responsible for ETL pipelines, predictive analysis, training, and driving company-wide adoption of data-informed decision-making.</p>
+    </div>
+    <div class="project-body single">
+      <ul class="impact-list">
+        <li><strong>30%+ reduction in customer churn</strong> through predictive modeling and customer behavior pattern identification, supporting retention and loyalty strategies</li>
+        <li><strong>35% reduction in employee turnover</strong> — previously near 100% — through people analytics and behavioral insights delivered to HR and leadership</li>
+        <li><strong>12% ROI increase</strong> through ETL-driven business opportunity identification and data-informed commercial strategy</li>
+        <li><strong>90%+ company-wide BI adoption</strong> achieved through tailored training sessions and cross-department enablement programs</li>
+        <li>Built predictive financial models supporting cash flow management and improving leadership's ability to anticipate risks and allocate resources effectively</li>
+        <li>Developed and maintained automated dashboards for 7+ departments, enabling real-time visibility into business performance</li>
+      </ul>
+    </div>
+    <div class="candeias-grid">
+      <div class="number-cell"><span class="number-val">30%+</span><span class="number-desc">Churn reduction</span></div>
+      <div class="number-cell"><span class="number-val">35%</span><span class="number-desc">Turnover reduction</span></div>
+      <div class="number-cell"><span class="number-val">12%</span><span class="number-desc">ROI increase</span></div>
+      <div class="number-cell"><span class="number-val">90%+</span><span class="number-desc">BI adoption rate</span></div>
+    </div>
+    <div class="tech-row">
+      <span class="tech-chip">Power BI</span><span class="tech-chip">SQL</span><span class="tech-chip">Python</span><span class="tech-chip">ETL</span><span class="tech-chip">Predictive Analytics</span><span class="tech-chip">Data Storytelling</span><span class="tech-chip">Excel / Google Sheets</span><span class="tech-chip">Agile / Kanban</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span class="footer-url">caiotorves.github.io</span>
+  <a href="index.html" style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3);text-decoration:none;">← Back to portfolio</a>
+</footer>
+
+</body>
+</html>
