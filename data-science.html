@@ -47,7 +47,6 @@
     .tech-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
     .tech-chip{font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);padding:3px 9px;border:1px solid var(--border);border-radius:100px;letter-spacing:.04em;}
 
-    /* buttons */
     .btn-row{display:flex;flex-direction:column;gap:8px;}
     .btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.07em;text-transform:uppercase;padding:10px 16px;border-radius:var(--radius);text-decoration:none;display:flex;align-items:center;justify-content:space-between;gap:8px;transition:all .18s;white-space:nowrap;}
     .btn-github{background:var(--bg3);color:var(--text2);border:1px solid var(--border2);}
@@ -78,10 +77,27 @@
 <div class="page-hero">
   <p class="page-tag">Projects</p>
   <h1 class="page-title">Data Science<br><em>& Analytics</em></h1>
-  <p class="page-sub">Five projects applying exploratory analysis, machine learning, and predictive modeling to real-world datasets — from financial markets to public health and human behavior.</p>
+  <p class="page-sub">Six projects applying exploratory analysis, machine learning, and predictive modeling to real-world datasets — from financial markets to public health and human behavior.</p>
 </div>
 
 <div class="content">
+
+  <!-- REVENUE FORECAST -->
+  <div class="project-block">
+    <div>
+      <span class="badge badge-ml">ML · Forecasting</span>
+      <h2 class="project-title">Revenue Forecast</h2>
+      <p class="project-subtitle">Revenue Planning & Forecasting · End-to-End Data Pipeline</p>
+      <p class="project-desc">End-to-end revenue planning pipeline built on the Superstore Sales dataset — connecting PostgreSQL, Python, and Power BI in a structured data architecture. The project covers data ingestion, dimensional modeling, analytical views, monthly revenue forecasting, and an executive dashboard for historical and predictive analysis.</p>
+      <div class="tech-row">
+        <span class="tech-chip">PostgreSQL</span><span class="tech-chip">Python</span><span class="tech-chip">Pandas</span><span class="tech-chip">Scikit-learn</span><span class="tech-chip">Power BI</span><span class="tech-chip">Dimensional Modeling</span><span class="tech-chip">Feature Engineering</span><span class="tech-chip">Ridge Regression</span>
+      </div>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-github" href="https://github.com/caiotorves/revenue-forecast" target="_blank"><span>View on GitHub</span><span class="btn-icon">↗</span></a>
+      <a class="btn btn-gold" href="https://app.powerbi.com/view?r=eyJrIjoiOGNlZjQ1NDctYmI0MS00NzNkLWE1YzYtMWNlYWU5YjI5ODc0IiwidCI6IjhkZmU1ZmEyLTYwMWEtNDk2Ny1hNGI0LWM4YWY4NjFlZjNmMSJ9" target="_blank"><span>View BI Dashboard</span><span class="btn-icon">↗</span></a>
+    </div>
+  </div>
 
   <!-- OBESITY -->
   <div class="project-block">
